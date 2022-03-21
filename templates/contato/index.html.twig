@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block title %} {{ titulo }} {% endblock %}
+{% block body %}
+<h1>{{ titulo }} </h1>
+<hr>
+<a href="{{ path ('contato_adicionar') }}">Adicionar contato</a>
+
+<table class="table"border="1px">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Tipo</td>
+            <td>Descrição</td>
+            <td>Nome da Pessoa</td>
+            <td>Ações</td>
+        </tr>
+    </thead>
+    <tbody>
+    {% for contato in contatos %}
+    <tr>
+        <td>{{ contato.id }}</td>
+        <td> 
+            {% if contato.tipo == '1' %} 
+                    Email
+                {% else %}
+                    Telefone
+                {% endif %}
+       
+       
+        </td>
+        <td>{{ contato.descricao }}</td>
+        <td>{{ contato.idPessoa.nome }}</td>
+        <td>
+        <a href="{{ path ('contato_editar',{id:contato.id}) }}"> Editar</a>
+       <a href="{{ path ('contato_excluir',{id:contato.id}) }}"> Excluir</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+
+
+{% endblock %}

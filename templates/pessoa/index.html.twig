@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block title %} {{ titulo }} {% endblock %}
+{% block body %}
+<h1>{{ titulo }} </h1>
+
+<hr>
+Pesquisar por nome:
+<!--
+Campo de Pesquisa:
+-->
+<form method="GET" >
+    <input type="text" name="nomePesquisado" id="nomePesquisado">
+    <input type="submit">
+</form><br>
+<!--
+Link para adicionar pessoa
+-->
+<a href="{{ path ('pessoa_adicionar') }}">Adicionar pessoa</a>
+
+<!--
+Tabela mostrando a primeira linha
+-->
+<table class="table"border="1px">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Nome</td>
+            <td>CPF</td>
+            <td>Ações</td>
+        </tr>
+    </thead>
+    <tbody>
+    <!--
+    For percorrendo tabela pessoas para mostrar na tabela
+    -->
+    {% for pessoa in pessoas %}
+    <tr>
+        <td>{{ pessoa.id }}</td>
+        <td>{{ pessoa.nome }}</td>
+        <td>{{ pessoa.cpf }}</td>
+        <td>
+        <a href="{{ path ('pessoa_editar',{id:pessoa.id}) }}"> Editar</a>
+        <a href="{{ path ('pessoa_excluir',{id:pessoa.id}) }}"> Excluir</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+{% endblock %}
